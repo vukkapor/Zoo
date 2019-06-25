@@ -16,7 +16,7 @@
       <div>
         <select v-model="newAnimal.animalType">
           <option disabled value>Please select one</option>
-          <option v-for="(type, index) in animalTypes" :key="index">{{type}} </option>
+          <option v-for="(type, index) in animalTypes" :key="index">{{type}}</option>
         </select>
         <span>Selected: {{ selected }}</span>
       </div>
@@ -44,6 +44,14 @@
         </td>
       </tr>
     </table>
+    <table style="width:100%">
+      <tr v-for="(animalType, index) in animalTypes" :key="index">
+        <td>{{animalType}}</td>
+        <td>
+          <button type="submit" @click="showAnimalsOfThatType(animalType)">Show animals</button>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -54,14 +62,39 @@ export default {
       newAnimal: this.defaultAnimal(),
 
       animals: [
-        { species: "Wolf1", name: "Wolf1", dateOfBirth: "12.01", animalType: "nesto" },
-        { species: "Wolf2", name: "Wolf2", dateOfBirth: NaN, animalType: "nesto"  },
-        { species: "Wolf3", name: "Wolf3", dateOfBirth: "12.01", animalType: "nesto"  },
-        { species: "Wolf4", name: "Wolf4", dateOfBirth: "12.01", animalType: "nesto"  },
-        { species: "Wolf5", name: "Wolf5", dateOfBirth: "12.01", animalType: "nesto"  }
+        {
+          species: "Wolf1",
+          name: "Wolf1",
+          dateOfBirth: "12.01",
+          animalType: "ptice"
+        },
+        {
+          species: "Wolf2",
+          name: "Wolf2",
+          dateOfBirth: NaN,
+          animalType: "ptice"
+        },
+        {
+          species: "Wolf3",
+          name: "Wolf3",
+          dateOfBirth: "12.01",
+          animalType: "nesto"
+        },
+        {
+          species: "Wolf4",
+          name: "Wolf4",
+          dateOfBirth: "12.01",
+          animalType: "nesto"
+        },
+        {
+          species: "Wolf5",
+          name: "Wolf5",
+          dateOfBirth: "12.01",
+          animalType: "sisari"
+        }
       ],
 
-      animalTypes: ['ptice', 'sisari', 'svasta']
+      animalTypes: ["ptice", "sisari", "svasta"]
     };
   },
 
@@ -86,6 +119,10 @@ export default {
     addAnimal() {
       this.animals.push({ ...this.newAnimal });
       this.newAnimal = this.defaultAnimal();
+    },
+    showAnimalsOfThatType(animalType) {
+      var animalsOfType = this.animals.filter(animals => animals.animalType === animalType).map(animal => animal.name);
+      alert(animalsOfType)
     }
   }
 };
