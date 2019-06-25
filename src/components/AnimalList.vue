@@ -9,8 +9,13 @@
       <tr v-for="(animal, index) in animals" :key="index">
         <td>{{animal.species}}</td>
         <td>{{animal.name}}</td>
-        <td >{{animal.dateOfBirth || "Nepoznat"}}</td>
-        <td> <button type="submit" @click="deleteAnimal(index)">Delete</button> </td>
+        <td>{{animal.dateOfBirth || "Nepoznat"}}</td>
+        <td>
+          <button type="submit" @click="deleteAnimal(index)">Delete</button>
+        </td>
+        <td>
+          <button type="submit" @click="moveToTop(index)">Move to top</button>
+        </td>
       </tr>
     </table>
   </div>
@@ -33,6 +38,11 @@ export default {
   methods: {
     deleteAnimal(index) {
       this.animals.splice(index, 1);
+    },
+
+    moveToTop(index) {
+      this.animals.unshift(this.animals[index]);
+      this.animals.splice(index+1, 1);
     }
   }
 };
