@@ -122,7 +122,7 @@ export default {
     },
     showAnimalsOfThatType(animalType) {
       var animalsOfType = this.animals.filter(animals => animals.animalType === animalType).map(animal => animal.name);
-      alert(animalsOfType)
+      alert(animalsOfType.join(', '))
     }
   }
 };
